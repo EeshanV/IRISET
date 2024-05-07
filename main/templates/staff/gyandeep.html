@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyandeep</title>
+
+    {% extends 'base.html' %}
+
+    {% block content %}
+    {% load static %}
+
+    <div class="container mt-4">
+      <h1>Gyandeep</h1>
+      <br>
+      <div style="margin-left: 5%;">
+      <a href="{%static 'gyandeep/Gyandeep_2023.pdf' %}" target="_blank">Gyandeep 2023</a><br>
+      <a href="{%static 'gyandeep/Gyandeep_2022.pdf' %}" target="_blank">Gyandeep 2022</a><br>
+      <a href="{%static 'gyandeep/Gyandeep_2021.pdf' %}" target="_blank">Gyandeep 2021</a><br>
+      <a href="{%static 'gyandeep/Gyandeep_2020.pdf' %}" target="_blank">Gyandeep 2020</a><br>
+      <a href="{%static 'gyandeep/Gyandeep_2019.pdf' %}" target="_blank">Gyandeep 2019</a><br>
+    </div>
+    </div>
+
+    {% endblock %}

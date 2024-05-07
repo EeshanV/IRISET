@@ -1,0 +1,237 @@
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+            .fixed-navbar {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1000;
+            }
+
+            .navbar-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 2%;
+            width: 100%;
+            position: relative;
+            transition: top 0.3s;
+            }
+
+            .dropdown-submenu {
+              position: relative;
+            }
+
+            .dropdown-submenu-arrow {
+              display: inline-block;
+              margin-right: 5px;
+            }
+
+            .dropdown-submenu-menu {
+              position: absolute;
+              top: 0;
+              left: 100%;
+              margin-top: -1px;
+              margin-left: -1px;
+            }
+
+            .dropdown-menu-right {
+              right: 0;
+              left: auto;
+            }
+
+            .logo {
+              display: inline-block;
+              margin-top: 5px;
+             }
+
+            @media (max-width: 767.98px) {
+              .dropdown-submenu-menu {
+                position: static;
+                margin-left: 15px;
+              }
+              .logo {
+              margin-top: 10px;
+             }
+            }
+    </style>
+</head>
+
+<body>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+{% load static %}
+
+
+<div class="container pt-10 pb-10" style="width: 100% !important; padding-bottom: 11px;">
+  <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-3" style="padding-right: 0;">
+          <a class="logo" href="/">
+              <img src="{% static 'images/iriset_logo.jpg' %}" alt="Logo" style="max-height: 100px;">
+          </a>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6" style="margin-top: 5px;">
+          <a href="/" style="font-size: 1.5rem !important; text-align: center !important; font-family: 'Libre Baskerville'; margin-bottom: 5px !important; display: block; color: black;">Indian Railways Institute of Signal Engineering and Telecommunications<span class="text-theme-colored2"></span></a>
+      </div>
+      <div class="sm-pull-none mb-sm-15" style="margin-right:10%; ">
+          <div style="padding-left: 40px; padding-top: 20px;"> 
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="navbar-container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+ <!--  <a class="" href="/">IRISET</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>-->
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Home
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="directorMessage">Director General Message</a>
+          <a class="dropdown-item" href="about">About IRISET</a>
+
+          <a class="dropdown-item dropdown-submenu dropdown-toggle dropend" href="management" data-toggle="dropdown">
+            Management & Faculty
+            </a>
+            <div class="dropdown-menu dropdown-submenu-menu dropend">
+              <a class="dropdown-item" href="management_gazetted">Gazetted</a>
+              <a class="dropdown-item" href="management_ngSignal">Non-Gazetted Signal</a>
+              <a class="dropdown-item" href="management_ngTelecom">Non-Gazetted Telecom</a>
+            </div>
+
+          <a class="dropdown-item dropdown-submenu dropdown-toggle dropend" href="department" data-toggle="dropdown">
+            Department
+          </a>
+          <div class="dropdown-menu dropdown-submenu-menu">
+            <a class="dropdown-item" href="department_signal">Signal</a>
+            <a class="dropdown-item" href="department_telecom">Telecom</a>
+            <a class="dropdown-item" href="department_it">IT</a>
+            <a class="dropdown-item" href="department_coeKavach">COE-Kavach</a>
+          </div>
+
+          <a class="dropdown-item" href="infrastructure">Infrastructure</a>
+          <a class="dropdown-item" href="http://10.195.2.9/gallery/index.php" target="_blank">Event-Photo gallery</a>
+          <a class="dropdown-item" href="annualReport">Annual report</a>
+        </div>
+      </li>
+    </ul>
+    
+
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Trainee Resources
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{%static 'briefing/briefing_v9.pdf' %}" target="_blank">Briefing</a>
+        <a class="dropdown-item" href="https://www.iriset.in/course_calendar.php" target="_blank">Course Calender</a>
+        <a class="dropdown-item" href="traineeManagement">Trainee Management system</a>
+        <a class="dropdown-item" href="contentManagement">Content Management system</a>
+        <a class="dropdown-item" href="libraryAccess">Library access</a>
+        <a class="dropdown-item" href="onlineExam">Online Exam</a>
+        <a class="dropdown-item" href="discussionForm">Discussion Form</a>
+      </div>
+    </li>
+  </ul>
+
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Employee Resources
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="darpan">Darpan</a>
+        <a class="dropdown-item" href="gyandeep">Gyandeep</a>
+        <a class="dropdown-item" href="sop">SOP</a>
+        <a class="dropdown-item" href="https://ir.eoffice.railnet.gov.in/" target="_blank">E-office Portal</a>
+        <a class="dropdown-item" href="https://sparrow.railnet.gov.in/SPARROW/otherAuthentication/showLoginType" target="_blank">Sparrow Portal</a>
+        <a class="dropdown-item" href="https://email.gov.in/" target="_blank">NIC Mail</a>
+        <a class="dropdown-item" href="https://hrms.indianrail.gov.in/HRMS/" target="_blank">HRMS Portal</a>
+        <a class="dropdown-item" href="https://igotkarmayogi.gov.in/#/" target="_blank">iGOT Portal</a>
+        <a class="dropdown-item" href="https://umid.digitalir.in" target="_blank">UMID Portal</a>
+        <a class="dropdown-item" href="https://www.ireps.gov.in/" target="_blank">IREPS Portal</a>
+        <a class="dropdown-item" href="https://iriset.indianrailways.gov.in/" target="_blank">IRISET Internet site</a>
+      </div>
+    </li>
+  </ul>
+
+
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Research & Innovations
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="coeKavach">COE-Kavach</a>
+        <a class="dropdown-item" href="_5g">5G</a>
+        <a class="dropdown-item" href="faculty">Faculty Development Programme</a>
+        <a class="dropdown-item" href="mous">MoUs</a>
+        <a class="dropdown-item" href="https://www.iriset.in/best-practices/" target="_blank">Innovations and Best Practices</a>
+      </div>
+    </li>
+  </ul>
+
+
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Notifications and Other Resources
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="selections">Selections</a>
+        <a class="dropdown-item" href="notifications">Notifications</a>
+        <a class="dropdown-item" href="railwaySites">Other Railway Sites</a>
+      </div>
+    </li>
+  </ul>
+
+
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Contact Us
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="reaching">Reaching IRISET</a>
+        <a class="dropdown-item" href="telephone">Telephone Directory</a>
+        <a class="dropdown-item" href="disclaimer">Disclaimer</a>
+        <a class="dropdown-item" href="privacyPolicy">Privacy policy</a>
+        <a class="dropdown-item" href="sexualHarassment">Sexual harassment committee</a>
+        <a class="dropdown-item" href="rti">RTI</a>
+        <a class="dropdown-item" href="nonRailway">Non-Railway Personnel</a>
+        <a class="dropdown-item" href="links">Other Links</a>
+      </div>
+    </li>
+  </ul>
+
+
+
+  </div>
+
+</nav>
+</div>
+
+
+
+{% block content %}
+{% endblock %}
+
+
+ 
+  <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+  <!-- Bootstrap JS (optional, if you need dropdown functionality) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  </body>
+  </html>

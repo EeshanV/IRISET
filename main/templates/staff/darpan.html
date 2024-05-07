@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darpan</title>
+
+    {% extends 'base.html' %}
+
+    {% block content %}
+    {% load static %}
+
+    <div class="container mt-4">
+      <h1>Darpan</h1>
+      <br>
+      <div style="margin-left: 5%;">
+        <a href="{%static 'darpan/DARPAN01_032024.pdf' %}" target="_blank">DARPAN Jan - Mar of 2024</a><br>
+        <a href="{%static 'darpan/DARPAN06_092023.pdf' %}" target="_blank">DARPAN Oct - Dec of 2023</a><br>
+        <a href="{%static 'darpan/DARPAN10_122023.pdf' %}" target="_blank">DARPAN June - Sept of 2023</a><br>
+      </div>
+    </div>
+    
+    {% endblock %}

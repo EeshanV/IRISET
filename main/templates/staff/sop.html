@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP</title>
+
+    {% extends 'base.html' %}
+
+    {% block content %}
+    {% load static %}
+
+    <div class="container mt-4">
+      <h1>SOP</h1>
+      <br>
+      <div style="margin-left: 5%;">
+        <a href="{%static 'sop/modelSOP.pdf' %}" target="_blank">Model SOP</a><br>
+        <a href="{%static 'sop/irisetsop20_21.pdf' %}" target="_blank">IRISET SOP 2020-21</a><br>
+      </div>
+    </div>
+    
+    {% endblock %}
