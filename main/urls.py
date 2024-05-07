@@ -10,12 +10,14 @@ urlpatterns = [
 
 #######################################################################################################################################
 
+    path('management', views.management, name='management'),
     path('management_gazetted', views.management_gazetted, name='management_gazetted'),
     path('management_ngSignal', views.management_ngSignal, name='management_ngSignal'),
     path('management_ngTelecom', views.management_ngTelecom, name='management_ngTelecom'),
 
 #######################################################################################################################################
     
+    path('department', views.department, name='department'),
     path('department_signal', views.department_signal, name='department_signal'),
     path('department_telecom', views.department_telecom, name='department_telecom'),
     path('department_it', views.department_it, name='department_it'),
@@ -23,6 +25,7 @@ urlpatterns = [
 
 #######################################################################################################################################
 
+    path('infrastructure', views.infrastructure, name='infrastructure'),
     path('infrastructure_lecture', views.infrastructure_lecture, name='infrastructure_lecture'),
     path('infrastructure_lecture_classrooms', views.infrastructure_lecture_classrooms, name='infrastructure_lecture_classrooms'),
     path('infrastructure_lecture_digital_classrooms', views.infrastructure_lecture_digital_classrooms, name='infrastructure_lecture_digital_classrooms'),

@@ -18,9 +18,13 @@ def about(request):
 
 #######################################################################################################################################
 
-def management_gazetted(request):
-    return render(request, 'home/management/gazetted.html')
+def management(request):
+    template = loader.get_template('home/management.html')
+    return HttpResponse(template.render())
 
+def management_gazetted(request):
+    template = loader.get_template('home/management/gazetted.html')
+    return HttpResponse(template.render())
 
 def management_ngSignal(request):
     template = loader.get_template('home/management/ngSignal.html')
@@ -31,6 +35,10 @@ def management_ngTelecom(request):
     return HttpResponse(template.render())
 
 #######################################################################################################################################
+
+def department(request):
+    template = loader.get_template('home/department.html')
+    return HttpResponse(template.render())
 
 def department_signal(request):
     template = loader.get_template('home/department/signal.html')
@@ -52,6 +60,10 @@ def department_coeKavach(request):
     return HttpResponse(template.render())
 
 #######################################################################################################################################
+
+def infrastructure(request):
+    template = loader.get_template('home/infrastructure.html')
+    return HttpResponse(template.render())
 
 def infrastructure_lecture(request):
     template = loader.get_template('home/infrastructure/lecture.html')
