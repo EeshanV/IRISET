@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     template = loader.get_template('index.html')
@@ -200,9 +203,10 @@ def mous(request):
     template = loader.get_template('home/mous.html')
     return HttpResponse(template.render())
 
+@login_required
 def innovations(request):
-    template = loader.get_template('research/innovations.html')
-    return HttpResponse(template.render())
+    context = {'user': request.user}
+    return render(request, 'research/innovations.html', context)
 
 # notification
 
@@ -250,4 +254,9 @@ def nonRailway(request):
 
 def links(request):
     template = loader.get_template('contact/links.html')
+    return HttpResponse(template.render())
+
+def logout_view(request):
+    logout(request)
+    template = loader.get_template('index.html')
     return HttpResponse(template.render())

@@ -91,4 +91,6 @@ urlpatterns = [
     path('nonRailway', views.nonRailway, name='nonRailway'),
     path('links', views.links, name='links'),
 
+    path('logout_view', views.logout_view, name='logout_view'),
+
 ]
