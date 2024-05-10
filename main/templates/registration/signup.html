@@ -1,6 +1,91 @@
-<h2>Sign up</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form }}
-  <button type="submit">Sign Up</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+</head>
+<body>
+    {% load static %}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('{% static "images/IRISET.png" %}');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .login-form {
+        width: 300px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    .login-form h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .login-form label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+    .login-form button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+    .login-form button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    .signup-link {
+        text-align: center;
+    }
+    .signup-link a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    </style>
+    <div class="container">
+    <form class="login-form" method="post">
+        {% csrf_token %}
+        <h2>Signup</h2>
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="id_username" required>
+        </div>
+        <div>
+            <label for="id_password1">Password:</label>
+            <input type="password" name="password1" id="id_password1" required>
+        </div>
+        <div>
+            <label for="id_password2">Password confirmation:</label>
+            <input type="password" name="password2" id="id_password2" required>
+        </div>
+        <button type="submit" style="background-color: black; color: #fff; border-radius: 200px;">Sign Up</button>
+        <div class="signup-link">
+            <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        </div>
+    </form>
+</div>
