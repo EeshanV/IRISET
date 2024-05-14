@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Management</title>
+    <style>
+    .navbar-container1 {
+        background-color: #D3D3D3;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin-left: 20%;
+        margin-top: 2%;
+        margin-right: 65%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: left;
+    }
+    </style>
 
     {% extends 'base.html' %}
 
@@ -12,5 +27,12 @@
     <div class="container mt-4">
       <h1>Management</h1>
     </div>
-    
+
+    <div class="navbar-container1">
+        <a href="management_gazetted">Gazetted Faculty</a>
+      <a href="management_ngSignal">Non-Gazetted Signal Faculty</a>
+      <a href="management_ngTelecom">Non-Gazetted Telecom Faculty</a>
+    </div>
+    </div>
+      
     {% endblock %}
