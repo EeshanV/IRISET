@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
+    <title>Login</title>
 </head>
 <body>
-    
+    {% load static %}
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-image: url('/static/images/IRISET.png');
+            background-image: url('{% static "images/IRISET.png" %}');
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -67,25 +67,25 @@
         text-decoration: none;
     }
     </style>
+</head>
+<body>
     <div class="container">
-    <form class="login-form" method="post">
-        <input type="hidden" name="csrfmiddlewaretoken" value="5TOfrZsm6mhWQ1HpT86Jhv7Ndwuc2cLs4jkiVyvOXnnuUDxWyynsEU9W1WRM7OXT">
-        <h2>Signup</h2>
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="id_username" required>
-        </div>
-        <div>
-            <label for="id_password1">Password:</label>
-            <input type="password" name="password1" id="id_password1" required>
-        </div>
-        <div>
-            <label for="id_password2">Password confirmation:</label>
-            <input type="password" name="password2" id="id_password2" required>
-        </div>
-        <button type="submit" style="background-color: black; color: #fff; border-radius: 200px;">Sign Up</button>
-        <div class="signup-link">
-            <p>Already have an account? <a href="/accounts/login/">Login</a></p>
-        </div>
-    </form>
-</div>
+        <form class="login-form" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <h2>Login</h2>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" style="background-color: black; color: #fff; border-radius: 200px;">Log In</button>
+            <div class="signup-link">
+                <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
