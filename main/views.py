@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.views import generic
 
 def index(request):
     template = loader.get_template('index.html')
@@ -186,8 +188,8 @@ def sop(request):
     return HttpResponse(template.render())
 
 # research
-
 def coeKavach(request):
+
     template = loader.get_template('research/coeKavach.html')
     return HttpResponse(template.render())
 
@@ -203,10 +205,50 @@ def mous(request):
     template = loader.get_template('home/mous.html')
     return HttpResponse(template.render())
 
-@login_required
+from .forms import PostForm
 def innovations(request):
-    context = {'user': request.user}
-    return render(request, 'research/innovations.html', context)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            content = form.cleaned_data['content']
+        else:
+            form=PostForm()
+    return render(request, 'research/innovations.html', {'form': form})
+
+from .models import Post
+def all_posts(request):
+    all_posts = Post.objects.all()
+    unique_usernames = set(post.user.username for post in all_posts)
+
+    # Collect posts with files but no content
+    posts_with_files = []
+    for post in all_posts:
+        if not post.content and post.file:
+            posts_with_files.append({'file_name': post.file.name.split('/')[-1], 'file_url': post.file.url})
+
+    return render(request, 'research/innovations.html', {'unique_usernames': unique_usernames, 'posts_with_files': posts_with_files})
+
+
+
+from django.contrib.auth.models import User
+def user_posts(request, username):
+    user = User.objects.get(username=username)
+    user_posts = Post.objects.filter(user=user)
+    post_data = [{'content': post.content, 'created_on': post.created_on} for post in user_posts]
+    return JsonResponse({'posts': post_data})
+
+@login_required
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect('all_posts') 
+    else:
+        form = PostForm()
+    return render(request, 'research/create_post.html', {'form': form})
 
 # notification
 
@@ -258,5 +300,6 @@ def links(request):
 
 def logout_view(request):
     logout(request)
-    template = loader.get_template('index.html')
-    return HttpResponse(template.render())
+    #template = loader.get_template('research/innovations.html')
+    #return HttpResponse(template.render())
+    return all_posts(request)

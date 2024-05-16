@@ -1,22 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Innovations and Best Practices</title>
-    
+    <style>
+      #user-posts {
+        list-style: none;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 200px;
+        background-color: #f2f2f2;
+        margin-left: 22%;
+        margin-top: 3%; 
+      }
+
+      #user-post-content {
+        margin-left: 21%;
+      }
+      .user-link {
+        text-decoration: none;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .user-link:hover {
+        color: #007bff;
+      }
+
+    </style>
     {% extends 'base.html' %}
     
     {% block content %}
-  
-    <div  style="margin-left: 90%; text-align: center;">
-      Welcome {{ user.username }} <br>
-      <a href="logout_view">Logout</a>
-    </div>
-    
-    <div class="container mt-4">
-      <h1>Innovations and Best Practices</h1>
-    </div>
 
+<div style="margin-left: 90%; text-align: center;">
+  {% if user.is_authenticated %}
+  Welcome {{ user.username }} <br>
+  <a href="{% url 'create_post' %}" style="color: blue;">Upload</a><br>
+  <a href="{% url 'logout_view' %}" style="color: red;">Logout</a>
+  {% else %}
+    <a href="{% url 'login' %}">Login</a>
+  {% endif %}
+</div>
+
+
+      <ul id="user-posts">
+        {% for username in unique_usernames %}
+        <li><a href="#" class="user-link" data-username="{{ username }}">{{ username }}</a></li>
+        {% endfor %}
+      </ul>
+        
+      <div id="user-post-content"></div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".user-link").forEach(function(link) {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    var username = this.getAttribute('data-username');
+                    fetchUserPosts(username);
+                });
+            });
+        });
+    
+        function fetchUserPosts(username) {
+            fetch("/posts/" + username + "/")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    var postsHtml = '';
+                    if (data.posts.length === 0) {
+                        postsHtml = '<p>No posts available for this user.</p>';
+                        if (data.posts_with_files.length > 0) {
+                            postsHtml += '<p>Uploaded files:</p><ul>';
+                            data.posts_with_files.forEach(post => {
+                                postsHtml += '<li><a href="' + post.file_url + '" class="file-link">' + post.file_name + '</a></li>';
+                            });
+                            postsHtml += '</ul>';
+                        }
+                    } else {
+                        postsHtml += '<ol>';
+                        data.posts.forEach(post => {
+                            postsHtml += '<li>' + post.content + '</li>';
+                        });
+                        postsHtml += '</ol>';
+                    }
+                    document.getElementById('user-post-content').innerHTML = postsHtml;
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        }
+    </script>
+      
 
   {% endblock %}

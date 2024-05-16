@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -74,7 +77,8 @@ urlpatterns = [
     path('_5g', views._5g, name='_5g'),
     path('faculty', views.faculty, name='faculty'),
     path('mous', views.mous, name='mous'),
-    path('innovations', views.innovations, name='innovations'),
+    path('innovations',  views.all_posts, name='all_posts'),
+    path('posts/<str:username>/', views.user_posts, name='user_posts'),
 
     #notification
     path('selections', views.selections, name='selections'),
@@ -92,5 +96,5 @@ urlpatterns = [
     path('links', views.links, name='links'),
 
     path('logout_view', views.logout_view, name='logout_view'),
-
+    path('create_post', views.create_post, name='create_post'),
 ]
