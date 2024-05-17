@@ -45,20 +45,77 @@ def department(request):
     template = loader.get_template('home/department.html')
     return HttpResponse(template.render())
 
+#######################################################################################################################################
+
 def department_signal(request):
     template = loader.get_template('home/department/signal.html')
     return HttpResponse(template.render())
 
+def department_signal_block(request):
+    template = loader.get_template('home/department/signal/block_signalling_laboratory.html')
+    return HttpResponse(template.render())
+
+def department_signal_electrical(request):
+    template = loader.get_template('home/department/signal/electrical_signalling_laboratory.html')
+    return HttpResponse(template.render())
+
+def department_signal_kavach(request):
+    template = loader.get_template('home/department/signal/kavach_lab.html')
+    return HttpResponse(template.render())
+
+def department_signal_outdoor(request):
+    template = loader.get_template('home/department/signal/outdoor_signalling_laboratory.html')
+    return HttpResponse(template.render())
+
+def department_signal_power(request):
+    template = loader.get_template('home/department/signal/power_systems_laboratory.html')
+    return HttpResponse(template.render())
+
+def department_signal_train(request):
+    template = loader.get_template('home/department/signal/train_detection_laboratory.html')
+    return HttpResponse(template.render())
+
+#######################################################################################################################################
 
 def department_it(request):
     template = loader.get_template('home/department/it.html')
     return HttpResponse(template.render())
 
+def department_it_computer(request):
+    template = loader.get_template('home/department/it/computer_lab.html')
+    return HttpResponse(template.render())
+
+def department_it_network(request):
+    template = loader.get_template('home/department/it/networking_lab.html')
+    return HttpResponse(template.render())
+
+def department_it_passenger(request):
+    template = loader.get_template('home/department/it/passenger.html')
+    return HttpResponse(template.render())
+
+#######################################################################################################################################
 
 def department_telecom(request):
     template = loader.get_template('home/department/telecom.html')
     return HttpResponse(template.render())
 
+def department_telecom_control(request):
+    template = loader.get_template('home/department/telecom/control.html')
+    return HttpResponse(template.render())
+    
+def department_telecom_outdoor(request):
+    template = loader.get_template('home/department/telecom/outdoor_telecom.html')
+    return HttpResponse(template.render())
+    
+def department_telecom_telephony(request):
+    template = loader.get_template('home/department/telecom/telephony.html')
+    return HttpResponse(template.render())
+    
+def department_telecom_transmission(request):
+    template = loader.get_template('home/department/telecom/transmission_system.html')
+    return HttpResponse(template.render())
+
+#######################################################################################################################################
 
 def department_coeKavach(request):
     template = loader.get_template('home/department/coeKavach.html')
@@ -103,19 +160,19 @@ def infrastructure_hostels(request):
     return HttpResponse(template.render())
 
 def infrastructure_hostels_kaveri(request):
-    template = loader.get_template('home/infrastructure/hostels.html')
+    template = loader.get_template('home/infrastructure/kaveri.html')
     return HttpResponse(template.render())
 
 def infrastructure_hostels_yamuna(request):
-    template = loader.get_template('home/infrastructure/hostels.html')
+    template = loader.get_template('home/infrastructure/yamuna.html')
     return HttpResponse(template.render())
 
 def infrastructure_hostels_krishna(request):
-    template = loader.get_template('home/infrastructure/hostels.html')
+    template = loader.get_template('home/infrastructure/krishna.html')
     return HttpResponse(template.render())
 
 def infrastructure_hostels_ganga(request):
-    template = loader.get_template('home/infrastructure/hostels.html')
+    template = loader.get_template('home/infrastructure/ganga.html')
     return HttpResponse(template.render())
 
 #######################################################################################################################################
@@ -220,21 +277,42 @@ def all_posts(request):
     all_posts = Post.objects.all()
     unique_usernames = set(post.user.username for post in all_posts)
 
-    # Collect posts with files but no content
-    posts_with_files = []
+    posts_data = []
     for post in all_posts:
-        if not post.content and post.file:
-            posts_with_files.append({'file_name': post.file.name.split('/')[-1], 'file_url': post.file.url})
+        file_url = None
+        if post.file:
+            file_url = post.file.url
+            print(f"File URL for post {post.id}: {file_url}")  # Print the file URL
 
-    return render(request, 'research/innovations.html', {'unique_usernames': unique_usernames, 'posts_with_files': posts_with_files})
+        post_info = {
+            'content': post.content,
+            'file_name': post.file.name.split('/')[-1] if post.file else None,
+            'file_url': file_url
+        }
+        posts_data.append(post_info)
 
+    context = {'posts': posts_data, 'unique_usernames': list(unique_usernames)}
+    return render(request, 'research/innovations.html', context)
 
 
 from django.contrib.auth.models import User
 def user_posts(request, username):
     user = User.objects.get(username=username)
     user_posts = Post.objects.filter(user=user)
-    post_data = [{'content': post.content, 'created_on': post.created_on} for post in user_posts]
+
+    post_data = []
+    for post in user_posts:
+        file_url = None
+        if post.file:
+            file_url = post.file.url
+
+        post_info = {
+            'content': post.content,
+            'file_name': post.file.name.split('/')[-1] if post.file else None,
+            'file_url': file_url
+        }
+        post_data.append(post_info)
+
     return JsonResponse({'posts': post_data})
 
 @login_required

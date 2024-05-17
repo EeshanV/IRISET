@@ -21,9 +21,34 @@ urlpatterns = [
 #######################################################################################################################################
     
     path('department', views.department, name='department'),
+
+#######################################################################################################################################
+
     path('department_signal', views.department_signal, name='department_signal'),
+    path('department_signal_block', views.department_signal_block, name='department_signal_block'),
+    path('department_signal_electrical', views.department_signal_electrical, name='department_signal_electrical'),
+    path('department_signal_kavach', views.department_signal_kavach, name='department_signal_kavach'),
+    path('department_signal_outdoor', views.department_signal_outdoor, name='department_signal_outdoor'),
+    path('department_signal_power', views.department_signal_power, name='department_signal_power'),
+    path('department_signal_train', views.department_signal_train, name='department_signal_train'),
+
+#######################################################################################################################################
+
     path('department_telecom', views.department_telecom, name='department_telecom'),
+    path('department_telecom_control', views.department_telecom_control, name='department_telecom_control'),
+    path('department_telecom_outdoor', views.department_telecom_outdoor, name='department_telecom_outdoor'),
+    path('department_telecom_telephony', views.department_telecom_telephony, name='department_telecom_telephony'),
+    path('department_telecom_transmission', views.department_telecom_transmission, name='department_telecom_transmission'),
+
+#######################################################################################################################################
+
     path('department_it', views.department_it, name='department_it'),
+    path('department_it_computer', views.department_it_computer, name='department_it_computer'),
+    path('department_it_network', views.department_it_network, name='department_it_network'),
+    path('department_it_passenger', views.department_it_passenger, name='department_it_passenger'),
+
+#######################################################################################################################################
+
     path('department_coeKavach', views.department_coeKavach, name='department_coeKavach'),
 
 #######################################################################################################################################

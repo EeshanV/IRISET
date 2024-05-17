@@ -4,7 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IT</title>
-
+    <style>
+      .navbar-container1 {
+        background-color: #D3D3D3;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin-left: 20%;
+        margin-top: 2%;
+        margin-right: 65%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: left;
+      }
+      .navbar-container2 {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin-left: 20%;
+        margin-top: 2%;
+        margin-right: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: left;
+      }
+      </style>
     {% extends 'base.html' %}
 
     {% block content %}
@@ -13,4 +40,9 @@
       <h1>IT</h1>
     </div>
     
+    <div class="navbar-container1">
+      <a href="department_it_computer">Computer Lab</a>
+      <a href="department_it_network">Networking Lab</a>
+      <a href="department_it_passenger">Passenger Information Systems Lab</a>
+      </div>
     {% endblock %}

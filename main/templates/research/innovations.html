@@ -67,36 +67,30 @@
     
         function fetchUserPosts(username) {
             fetch("/posts/" + username + "/")
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    var postsHtml = '';
-                    if (data.posts.length === 0) {
-                        postsHtml = '<p>No posts available for this user.</p>';
-                        if (data.posts_with_files.length > 0) {
-                            postsHtml += '<p>Uploaded files:</p><ul>';
-                            data.posts_with_files.forEach(post => {
-                                postsHtml += '<li><a href="' + post.file_url + '" class="file-link">' + post.file_name + '</a></li>';
-                            });
-                            postsHtml += '</ul>';
-                        }
-                    } else {
-                        postsHtml += '<ol>';
-                        data.posts.forEach(post => {
-                            postsHtml += '<li>' + post.content + '</li>';
-                        });
-                        postsHtml += '</ol>';
-                    }
-                    document.getElementById('user-post-content').innerHTML = postsHtml;
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.json();
+              })
+              .then(data => {
+                var postsHtml = '<ol>';
+
+                data.posts.forEach(post => {
+                  postsHtml += '<li>' + post.content + ' ';
+                  if (post.file_url) {
+                    postsHtml += '<a href="' + post.file_url + '" target="_blank">' + (post.file_name || 'View File') + '</a>';
+                  }
+                  postsHtml += '</li>';
                 });
-        }
+
+                postsHtml += '</ol>';
+                document.getElementById('user-post-content').innerHTML = postsHtml;
+              })
+              .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+              });
+          }
     </script>
       
 
